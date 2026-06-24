@@ -271,6 +271,7 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
+      align-items: center;
     }
     .about-detail-row {
       display: flex;
@@ -289,6 +290,8 @@
       flex-wrap: wrap;
       gap: 8px;
       margin-top: 4px;
+      justify-content: center;
+      align-items: center;
     }
     .badge {
       padding: 3px 10px;
@@ -299,7 +302,7 @@
       color: var(--text-secondary);
       border: 1px solid var(--border);
     }
-
+    
     /* ============================================================
        EXPERIENCE
     ============================================================ */
@@ -634,6 +637,10 @@
           <!-- action buttons -->
           <div class="hero-actions">
             <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="cv.pdf" download="Giovanni-CV.pdf" class="btn btn-ghost">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download CV
+            </a>
           </div>
         </div>
 
@@ -647,44 +654,35 @@
     </div>
   </section>
 
-  <!-- ============================================================
-       ABOUT — edit the paragraph and the detail rows
+ <!-- ============================================================
+       ABOUT — edit the bio paragraphs and language badges here
   ============================================================ -->
   <section id="about">
     <div class="container">
-      <p class="section-label">About</p>
-      <h2 class="section-title">Background</h2>
-      <div class="about-grid">
-        <p class="about-text">
-          I'm a mechatronics engineering graduate with a dual degree from
-          Swiss German University (Indonesia) and Fachhochschule Südwestfalen (Germany).
-          My background spans electrical system assembly, industrial panel wiring,
-          CAD modelling, PLC automation, and PCB design — with internship experience
-          in both Indonesia and Germany. Outside hardware, I enjoy building
-          data science and machine learning solutions.
-        </p>
-        <div class="about-details">
-          <div class="about-detail-row">
-            <span class="detail-label">Location</span>
-            <span class="detail-value">Tangerang, Banten, Indonesia</span>
-          </div>
-          <div class="about-detail-row">
-            <span class="detail-label">Email</span>
-            <a href="mailto:ivanong.cc.sgu.21@gmail.com" class="detail-value">ivanong.cc.sgu.21@gmail.com</a>
-          </div>
-          <div class="about-detail-row">
-            <span class="detail-label">Mobile (WA)</span>
-            <span class="detail-value">+62-878-8001-0121</span>
-          </div>
-          <div class="about-detail-row">
-            <span class="detail-label">Languages</span>
-            <div class="lang-badges">
-              <span class="badge">Indonesian — Native</span>
-              <span class="badge">English — Fluent</span>
-              <span class="badge">German — Basic</span>
-            </div>
-          </div>
-        </div>
+      <p class="section-label">About Me</p>
+      <h2 class="section-title">Who I Am.</h2>
+
+      <p style="font-size:18px; font-weight:600; color:var(--text-primary); margin-bottom:24px;">
+        Mechatronics Engineer &amp; Data Analyst Enthusiast
+      </p>
+
+      <p style="font-size:15.5px; color:var(--text-secondary); line-height:1.8; max-width:700px; margin-bottom:20px; text-align: justify;">
+        I'm <strong>Giovanni Gunawan Wangidjaja</strong>, a dual-degree Mechatronics Engineering
+        graduate from Swiss German University (Indonesia) and Fachhochschule Südwestfalen (Germany).
+        I have hands-on experience in electrical systems, industrial panel wiring, and manufacturing
+        processes through internships in both Germany and Indonesia.
+      </p>
+
+      <p style="font-size:15.5px; color:var(--text-secondary); line-height:1.8; max-width:700px; margin-bottom:32px; text-align: justify;">
+        I have a strong foundation in automation, CAD design, and control systems, with growing
+        skills in PLC programming and data analysis. I'm seeking an engineering role in automation,
+        electrical, or manufacturing environments where I can apply both my hardware and data skill set.
+      </p>
+
+      <div class="lang-badges">
+        <span class="badge">Indonesian — Native</span>
+        <span class="badge">English — Fluent</span>
+        <span class="badge">German — Basic</span>
       </div>
     </div>
   </section>
