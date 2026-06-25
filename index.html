@@ -416,8 +416,8 @@
        EDUCATION
     ============================================================ */
     .edu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      display: flex;
+      flex-direction: column;
       gap: 16px;
     }
     .edu-card {
@@ -425,23 +425,32 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 20px 24px;
-    }
-    .edu-degree {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 4px;
-    }
-    .edu-school {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
     }
     .edu-year {
-      font-size: 12px;
-      color: var(--text-muted);
+      font-size: 12px; 
+      color: #c0392b;
+      background: rgba(192,57,43,0.08);
+      border-radius: 20px;
+      padding: 3px 12px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
-
+    .edu-degree { 
+      font-size: 15px; 
+      font-weight: 600; 
+      color: var(--text-primary); 
+    }
+    .edu-school {
+      font-size: 13px; 
+      color: var(--accent);
+      display: flex; 
+      align-items: center; 
+      gap: 6px;
+    }
+    
     /* ============================================================
        SKILLS
     ============================================================ */
@@ -702,14 +711,14 @@
         Mechatronics Engineer &amp; Data Analyst Enthusiast
       </p>
 
-      <p style="font-size:15.5px; color:var(--text-secondary); line-height:1.8; max-width:700px; margin-bottom:20px; text-align: justify;">
+      <p style="font-size:15.5px; color:var(--text-secondary); line-height:1.8; margin-bottom:20px; text-align: justify;">
         I'm <strong>Giovanni Gunawan Wangidjaja</strong>, a dual-degree Mechatronics Engineering
         graduate from Swiss German University (Indonesia) and Fachhochschule Südwestfalen (Germany).
         I have hands-on experience in electrical systems, industrial panel wiring, and manufacturing
         processes through internships in both Germany and Indonesia.
       </p>
 
-      <p style="font-size:15.5px; color:var(--text-secondary); line-height:1.8; max-width:700px; margin-bottom:32px; text-align: justify;">
+      <p style="font-size:15.5px; color:var(--text-secondary); line-height:1.8; margin-bottom:32px; text-align: justify;">
         I have a strong foundation in automation, CAD design, and control systems, with growing
         skills in PLC programming and data analysis. I'm seeking an engineering role in automation,
         electrical, or manufacturing environments where I can apply both my hardware and data skill set.
@@ -775,7 +784,7 @@
     </div>
   </section>
 
-  <!-- ============================================================
+<!-- ============================================================
        EDUCATION — edit or duplicate .edu-card blocks
   ============================================================ -->
   <section id="education">
@@ -785,21 +794,27 @@
       <div class="edu-grid">
 
         <div class="edu-card">
-          <p class="edu-degree">B.Eng., Mechatronics Engineering</p>
-          <p class="edu-school">Fachhochschule Südwestfalen, Germany</p>
-          <p class="edu-year">2024 – 2026</p>
+          <div>
+            <p class="edu-degree">B.Eng., Mechatronics Engineering</p>
+            <p class="edu-school">Fachhochschule Südwestfalen, Germany</p>
+          </div>
+          <span class="edu-year">2024 – 2026</span>
         </div>
 
         <div class="edu-card">
-          <p class="edu-degree">S.T., Mechanical Engineering</p>
-          <p class="edu-school">Swiss German University, Indonesia</p>
-          <p class="edu-year">2021 – 2026</p>
+          <div>
+            <p class="edu-degree">S.T., Mechanical Engineering</p>
+            <p class="edu-school">Swiss German University, Indonesia</p>
+          </div>
+          <span class="edu-year">2021 – 2026</span>
         </div>
 
         <div class="edu-card">
-          <p class="edu-degree">Senior High School (Science)</p>
-          <p class="edu-school">Canisius College, Indonesia</p>
-          <p class="edu-year">2018 – 2021</p>
+          <div>
+            <p class="edu-degree">Senior High School (Science)</p>
+            <p class="edu-school">Canisius College, Indonesia</p>
+          </div>
+          <span class="edu-year">2018 – 2021</span>
         </div>
 
       </div>
