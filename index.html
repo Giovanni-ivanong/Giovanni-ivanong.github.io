@@ -545,54 +545,43 @@
     }
     .cert-btn-primary:hover { background: #1e3570; text-decoration: none; }
 
-    /* ============================================================
+/* ============================================================
        PROJECTS
     ============================================================ */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
     }
     .project-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 24px;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      transition: border-color 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
     }
-    .project-card:hover { border-color: rgba(79,142,247,0.4); }
-    .project-card-top {
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      text-decoration: none;
+    }
+    .project-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    .project-body {
+      padding: 20px;
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-    .project-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: var(--accent-dim);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .project-icon svg { width: 20px; height: 20px; stroke: var(--accent); }
-    .project-year {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-    .project-title {
-      font-family: var(--font-display);
-      font-size: 17px;
-      font-weight: 500;
-      color: var(--text-primary);
-    }
-    .project-desc {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.7;
+      flex-direction: column;
+      gap: 10px;
       flex: 1;
     }
     .project-tags {
@@ -602,10 +591,49 @@
     }
     .project-tag {
       font-size: 12px;
-      color: var(--accent);
-      background: var(--accent-dim);
+      color: var(--text-secondary);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 3px 10px;
+      padding: 2px 10px;
+    }
+    .project-title {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .project-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      flex: 1;
+    }
+    .view-all-wrap {
+      text-align: center;
+      margin-top: 8px;
+    }
+    .btn-view-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-view-all:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+    }
+    @media (max-width: 768px) {
+      .projects-grid { grid-template-columns: 1fr; }
     }
 
     /* ============================================================
@@ -1013,105 +1041,77 @@
        PROJECTS — duplicate a .project-card to add more projects.
        Update the title, year, description, and tags for each one.
   ============================================================ -->
-  <section id="projects">
+<section id="projects">
     <div class="container">
-      <p class="section-label">Projects</p>
-      <h2 class="section-title">Selected Work</h2>
+      <p class="section-label">Selected Work</p>
+      <h2 class="section-title">Featured Projects.</h2>
       <div class="projects-grid">
 
-        <!-- Project 1 -->
-        <div class="project-card">
-          <div class="project-card-top">
-            <div class="project-icon">
-              <!-- Robot icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="11" width="10" height="8" rx="1"/><path d="M12 11V7"/><circle cx="12" cy="5" r="2"/><path d="M7 14H5m12 0h2"/></svg>
+        <!-- Project 1 — Self-Balancing Robot -->
+        <a href="projects/self-balancing-robot.html" class="project-card">
+          <img src="Robot.png" alt="Self-Balancing Robot" class="project-img" />
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">ESP32</span>
+              <span class="project-tag">SolidWorks</span>
+              <span class="project-tag">PID</span>
+              <span class="project-tag">Fuzzy Logic</span>
+              <span class="project-tag">Python</span>
             </div>
-            <span class="project-year">2026</span>
+            <p class="project-title">Self-Balancing Robot</p>
+            <p class="project-desc">
+              Thesis project. 3D modelled and printed the chassis, wired an ESP32,
+              and implemented PID vs Fuzzy Logic control with Python Teleplot for analysis.
+            </p>
           </div>
-          <p class="project-title">Self-Balancing Robot</p>
-          <p class="project-desc">
-            Thesis project. 3D modelled and printed the robot chassis in SolidWorks and FreeCAD,
-            wired an ESP32 microcontroller, and implemented two control systems
-            (PID vs Fuzzy Logic) with Python Teleplot for real-time data extraction and analysis.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">SolidWorks</span>
-            <span class="project-tag">ESP32</span>
-            <span class="project-tag">PID</span>
-            <span class="project-tag">Fuzzy Logic</span>
-            <span class="project-tag">Python</span>
-            <span class="project-tag">3D Printing</span>
-          </div>
-        </div>
+        </a>
 
-        <!-- Project 2 -->
-        <div class="project-card">
-          <div class="project-card-top">
-            <div class="project-icon">
-              <!-- Chart/ML icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 16 4-4 4 4 4-4"/></svg>
+        <!-- Project 2 — BLDC Motor Mount -->
+        <a href="projects/bldc-motor-mount.html" class="project-card">
+          <img src="BLDC.png" alt="BLDC Motor Mount" class="project-img" />
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">SolidWorks</span>
+              <span class="project-tag">CAD</span>
+              <span class="project-tag">BLDC Motor</span>
+              <span class="project-tag">Mechanical Design</span>
             </div>
-            <span class="project-year">2025</span>
+            <p class="project-title">BLDC Motor Mount</p>
+            <p class="project-desc">
+              A motor mount engineered for a hoverboard BLDC motor, designed for
+              versatile manufacturing — compatible with CNC machining or 3D printing.
+            </p>
           </div>
-          <p class="project-title">Bank Marketing Campaign</p>
-          <p class="project-desc">
-            Data science project. Built a machine learning model to predict term deposit subscription
-            using Logistic Regression, KNN, Decision Tree, and Random Forest — with full
-            data preprocessing, feature engineering, and model evaluation.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">Python</span>
-            <span class="project-tag">Machine Learning</span>
-            <span class="project-tag">Scikit-learn</span>
-            <span class="project-tag">Data Analysis</span>
-          </div>
-        </div>
+        </a>
 
-        <!-- Project 3 — BLDC Motor Mount (from your base44 portfolio) -->
-        <div class="project-card">
-          <div class="project-card-top">
-            <div class="project-icon">
-              <!-- Gear/motor icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M4.22 4.22l2.12 2.12m11.32 11.32 2.12 2.12M2 12h3m14 0h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+        <!-- Project 3 — CLV Prediction -->
+        <a href="projects/clv-prediction.html" class="project-card">
+          <img src="CLV.png" alt="CLV Prediction" class="project-img" />
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Machine Learning</span>
+              <span class="project-tag">XGBoost</span>
+              <span class="project-tag">Pandas</span>
             </div>
-            <span class="project-year">—</span>     <!-- ← update this year -->
+            <p class="project-title">Customer Lifetime Value Prediction</p>
+            <p class="project-desc">
+              A machine learning pipeline that predicts Customer Lifetime Value
+              using RFM segmentation and regression models to identify high-value customers.
+            </p>
           </div>
-          <p class="project-title">BLDC Motor Mount</p>
-          <p class="project-desc">
-            <!-- ↓ Add a description here when you're ready -->
-            CAD design for a brushless DC motor mount. Update this description with details about the
-            design goals, tools used, and outcome.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">CAD</span>
-            <span class="project-tag">SolidWorks</span>
-            <!-- add more tags as needed -->
-          </div>
-        </div>
-
-        <!-- Project 4 — ESP32 PCB Board -->
-        <div class="project-card">
-          <div class="project-card-top">
-            <div class="project-icon">
-              <!-- PCB icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2m6-2v2M9 20v2m6-2v2M2 9h2m-2 6h2m18-6h-2m2 6h-2"/></svg>
-            </div>
-            <span class="project-year">—</span>     <!-- ← update this year -->
-          </div>
-          <p class="project-title">ESP32 PCB Board</p>
-          <p class="project-desc">
-            <!-- ↓ Add a description here when you're ready -->
-            Custom PCB design for an ESP32 microcontroller. Update this description with
-            the board's purpose, features, and design tools used.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">PCB Design</span>
-            <span class="project-tag">Proteus</span>
-            <span class="project-tag">ESP32</span>
-          </div>
-        </div>
+        </a>
 
       </div>
+
+      <!-- View All Projects button -->
+      <div class="view-all-wrap">
+        <a href="projects.html" class="btn-view-all">
+          View All Projects
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
     </div>
   </section>
 
