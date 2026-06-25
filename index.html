@@ -74,10 +74,39 @@
       height: 56px;
     }
     .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-box {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+    .nav-logo-text { line-height: 1.2; }
+    .nav-logo-name {
       font-family: var(--font-display);
       font-weight: 600;
       font-size: 15px;
       color: var(--text-primary);
+    }
+    .nav-logo-sub {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
     }
     .nav-links {
       display: flex;
@@ -592,7 +621,13 @@
   ============================================================ -->
   <nav>
     <div class="container">
-      <span class="nav-logo">Giovanni G.</span>
+      <a href="#hero" class="nav-logo">
+        <div class="nav-logo-box">GG</div>
+        <div class="nav-logo-text">
+          <div class="nav-logo-name">Giovanni</div>
+          <div class="nav-logo-sub">Portfolio</div>
+        </div>
+      </a>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
