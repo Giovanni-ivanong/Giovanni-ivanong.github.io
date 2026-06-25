@@ -455,15 +455,18 @@
        SKILLS
     ============================================================ */
     .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
     .skill-group {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 20px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
     }
     .skill-group-label {
       font-size: 11px;
@@ -471,7 +474,9 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--text-muted);
-      margin-bottom: 14px;
+      min-width: 130px;
+      flex-shrink: 0;
+      padding-top: 4px;
     }
     .skill-tags {
       display: flex;
@@ -490,36 +495,55 @@
     /* ============================================================
        CERTIFICATIONS
     ============================================================ */
-    .cert-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    .cert-list { display: flex; flex-direction: column; gap: 16px; }
     .cert-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 16px 20px;
-      gap: 16px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
-    .cert-name {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-primary);
-    }
-    .cert-issuer {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-top: 2px;
-    }
-    .cert-year {
-      font-size: 13px;
-      color: var(--text-muted);
+    .cert-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--accent-dim);
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
+    .cert-icon svg { width: 22px; height: 22px; stroke: var(--accent); }
+    .cert-body { flex: 1; }
+    .cert-name { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+    .cert-issuer { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+    .cert-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+    .cert-date {
+      font-size: 12px; color: var(--text-muted);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 2px 10px;
+    }
+    .cert-number { font-size: 12px; color: var(--text-muted); }
+    .cert-actions { display: flex; gap: 10px; flex-shrink: 0; }
+    .cert-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 18px; border-radius: 50px;
+      font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.2s;
+      text-decoration: none; white-space: nowrap;
+    }
+    .cert-btn svg { width: 14px; height: 14px; }
+    .cert-btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .cert-btn-outline:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .cert-btn-primary {
+      background: var(--accent); color: #fff;
+      border: 1.5px solid var(--accent);
+    }
+    .cert-btn-primary:hover { background: #1e3570; text-decoration: none; }
 
     /* ============================================================
        PROJECTS
@@ -821,6 +845,122 @@
     </div>
   </section>
 
+   <!-- ============================================================
+       SKILLS — add/remove skill-tag spans to update each group
+  ============================================================ -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-label">Skills</p>
+      <h2 class="section-title">My Skills</h2>
+      <div class="skills-grid">
+
+        <div class="skill-group">
+          <p class="skill-group-label">CAD & Design</p>
+          <div class="skill-tags">
+            <span class="skill-tag">AutoCAD</span>
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">FreeCAD</span>
+            <span class="skill-tag">PCB Design (Proteus)</span>
+            <span class="skill-tag">Technical Drawing</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <p class="skill-group-label">Engineering</p>
+          <div class="skill-tags">
+            <span class="skill-tag">PLC</span>
+            <span class="skill-tag">Arduino IDE</span>
+            <span class="skill-tag">ESP32</span>
+            <span class="skill-tag">Milling & Turning</span>
+            <span class="skill-tag">Control Systems</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <p class="skill-group-label">Data & Programming</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Machine Learning</span>
+            <span class="skill-tag">Data Visualization</span>
+            <span class="skill-tag">Statistical Analysis</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <p class="skill-group-label">Tools</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Git & GitHub</span>
+            <span class="skill-tag">VS Code</span>
+            <span class="skill-tag">Microsoft Excel</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CERTIFICATIONS — duplicate a .cert-item to add more
+  ============================================================ -->
+<section id="certifications">
+    <div class="container">
+      <p class="section-label">Credentials</p>
+      <h2 class="section-title">Certifications</h2>
+      <div class="cert-list">
+
+        <div class="cert-item">
+          <div class="cert-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M9 11l-1 5 4-2 4 2-1-5"/></svg>
+          </div>
+          <div class="cert-body">
+            <p class="cert-name">Siemens Mechatronic Systems Certification Program (SMSCP) — Level 1</p>
+            <p class="cert-issuer">Siemens, Germany</p>
+            <div class="cert-meta">
+              <span class="cert-date">2024</span>
+            </div>
+            <!-- ↓ optional: add cert number if you want -->
+            <!-- <p class="cert-number">Cert. No.: XXXX</p> -->
+          </div>
+          <div class="cert-actions">
+            <!-- ↓ replace # with your certificate link when ready -->
+            <a href="#" class="https://drive.google.com/file/d/18KdgraRZ9i5U5vbGnrJPrwR2fQp0bUUw/view?usp=drive_link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              View Certificate
+            <a href="siemens-cert.pdf" download="siemens-cert.pdf" class="cert-btn cert-btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M9 11l-1 5 4-2 4 2-1-5"/></svg>
+          </div>
+          <div class="cert-body">
+            <p class="cert-name">Data Science &amp; Machine Learning Certification</p>
+            <p class="cert-issuer">Purwadhika Digital Technology School, Indonesia</p>
+            <div class="cert-meta">
+              <span class="cert-date">2025</span>
+            </div>
+          </div>
+          <div class="cert-actions">
+            <a href="#" class="cert-btn cert-btn-outline">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              View Certificate
+            </a>
+            <a href="purwadhika-cert.pdf" download="Purwadhika Certificate.pdf" class="cert-btn cert-btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download PDF
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ============================================================
        PROJECTS — duplicate a .project-card to add more projects.
        Update the title, year, description, and tags for each one.
@@ -921,90 +1061,6 @@
             <span class="project-tag">Proteus</span>
             <span class="project-tag">ESP32</span>
           </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SKILLS — add/remove skill-tag spans to update each group
-  ============================================================ -->
-  <section id="skills">
-    <div class="container">
-      <p class="section-label">Skills</p>
-      <h2 class="section-title">Technical Skills</h2>
-      <div class="skills-grid">
-
-        <div class="skill-group">
-          <p class="skill-group-label">CAD & Design</p>
-          <div class="skill-tags">
-            <span class="skill-tag">AutoCAD</span>
-            <span class="skill-tag">SolidWorks</span>
-            <span class="skill-tag">FreeCAD</span>
-            <span class="skill-tag">PCB Design (Proteus)</span>
-            <span class="skill-tag">Technical Drawing</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <p class="skill-group-label">Engineering</p>
-          <div class="skill-tags">
-            <span class="skill-tag">PLC</span>
-            <span class="skill-tag">Arduino IDE</span>
-            <span class="skill-tag">ESP32</span>
-            <span class="skill-tag">Milling & Turning</span>
-            <span class="skill-tag">Control Systems</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <p class="skill-group-label">Data & Programming</p>
-          <div class="skill-tags">
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">SQL</span>
-            <span class="skill-tag">Machine Learning</span>
-            <span class="skill-tag">Data Visualization</span>
-            <span class="skill-tag">Statistical Analysis</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <p class="skill-group-label">Tools</p>
-          <div class="skill-tags">
-            <span class="skill-tag">Git & GitHub</span>
-            <span class="skill-tag">VS Code</span>
-            <span class="skill-tag">Microsoft Excel</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       CERTIFICATIONS — duplicate a .cert-item to add more
-  ============================================================ -->
-  <section id="certifications">
-    <div class="container">
-      <p class="section-label">Certifications</p>
-      <h2 class="section-title">Credentials</h2>
-      <div class="cert-list">
-
-        <div class="cert-item">
-          <div>
-            <p class="cert-name">Siemens Mechatronic Systems Certification Program (SMSCP) — Level 1</p>
-            <p class="cert-issuer">Siemens, Germany</p>
-          </div>
-          <span class="cert-year">2024</span>
-        </div>
-
-        <div class="cert-item">
-          <div>
-            <p class="cert-name">Data Science & Machine Learning Certification</p>
-            <p class="cert-issuer">Purwadhika Digital Technology School, Indonesia</p>
-          </div>
-          <span class="cert-year">2025</span>
         </div>
 
       </div>
