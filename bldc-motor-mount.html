@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BLDC Motor Mount — Giovanni Gunawan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — keep these identical to index.html
+    ============================================================ */
+    :root {
+      --bg:             #eef0f4;
+      --bg-card:        #f5f6f9;
+      --bg-subtle:      #e8eaef;
+      --accent:         #2c4a8f;
+      --accent-dim:     rgba(44,74,143,0.09);
+      --accent-hover:   #1e3570;
+      --text-primary:   #1a1d23;
+      --text-secondary: #4a5060;
+      --text-muted:     #8a909f;
+      --border:         rgba(0,0,0,0.07);
+      --radius:         12px;
+      --font-display:   'Space Grotesk', sans-serif;
+      --font-body:      'Inter', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 28px; }
+
+    /* NAV — same as index.html */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(238,240,244,0.90);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .container {
+      display: flex; align-items: center;
+      justify-content: space-between; height: 56px;
+    }
+    .nav-logo {
+      display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+    }
+    .nav-logo-box {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--accent); display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 14px;
+      color: #fff; letter-spacing: 0.5px;
+    }
+    .nav-logo-text { line-height: 1.2; }
+    .nav-logo-name { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--text-primary); }
+    .nav-logo-sub {
+      font-family: var(--font-display); font-weight: 700; font-size: 10px;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-secondary);
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--text-secondary); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); text-decoration: none; }
+    @media (max-width: 680px) { .nav-links { display: none; } }
+
+    /* PAGE CONTENT */
+    main { padding: 48px 0 100px; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    .back-link svg { width: 16px; height: 16px; }
+
+    .project-label {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #c0392b; margin-bottom: 12px;
+    }
+    .project-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 46px);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+    .project-h1 span { color: #c0392b; }
+    .project-intro {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 680px;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .project-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 48px;
+    }
+    .project-tag {
+      font-size: 13px; color: var(--text-secondary);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 4px 14px;
+    }
+
+    .section-block { margin-bottom: 48px; }
+    .section-h2 {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+
+    .image-frame {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .image-frame img {
+      max-width: 100%;
+      max-height: 420px;
+      border-radius: 8px;
+      display: block;
+    }
+
+    /* PDF VIEWER BLOCK */
+    .pdf-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .pdf-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .pdf-name { font-size: 15px; font-weight: 500; color: var(--text-primary); }
+    .pdf-download-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #fff;
+      padding: 9px 20px; border-radius: 50px;
+      font-size: 13px; font-weight: 500;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .pdf-download-btn:hover { background: var(--accent-hover); text-decoration: none; }
+    .pdf-download-btn svg { width: 14px; height: 14px; }
+    .pdf-embed-wrap { width: 100%; height: 600px; background: #525659; }
+    .pdf-embed-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+
+    footer {
+      text-align: center; padding: 32px 24px;
+      font-size: 13px; color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV — identical to index.html, links point back to main page sections
+  ============================================================ -->
+  <nav>
+    <div class="container">
+      <a href="../index.html#hero" class="nav-logo">
+        <div class="nav-logo-box">GG</div>
+        <div class="nav-logo-text">
+          <div class="nav-logo-name">Giovanni</div>
+          <div class="nav-logo-sub">Portfolio</div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html#hero">Home</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <!-- Back link -->
+      <a href="../index.html#projects" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m7-7-7 7 7 7"/></svg>
+        Back to Home
+      </a>
+
+      <!-- Title block -->
+      <p class="project-label">CAD Design</p>
+      <h1 class="project-h1">BLDC Motor Mount<span>.</span></h1>
+      <p class="project-intro">
+        A precision-engineered BLDC (Brushless DC) motor mounting bracket designed in
+        SolidWorks. The assembly consists of two aluminium parts — a flat base and a
+        rounded cradle — designed for CNC machining with full technical drawings.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag">SolidWorks</span>
+        <span class="project-tag">CAD</span>
+        <span class="project-tag">BLDC Motor</span>
+        <span class="project-tag">Mechanical Design</span>
+        <span class="project-tag">Aluminium</span>
+      </div>
+
+      <!-- Assembled Motor image -->
+      <div class="section-block">
+        <h2 class="section-h2">Assembled Motor</h2>
+        <div class="image-frame">
+          <!-- ↓ replace with your own photo/render filename -->
+          <img src="../bldc.png" alt="Assembled BLDC motor mount" />
+        </div>
+      </div>
+
+      <!-- Technical Drawings + PDF -->
+      <div class="section-block">
+        <h2 class="section-h2">Technical Drawings</h2>
+        <div class="pdf-block">
+          <div class="pdf-header">
+            <span class="pdf-name">Motor Mount Flat</span>
+            <!-- ↓ replace with your actual PDF filename uploaded to /projects/ -->
+            <a href="motor-mount-flat.pdf" download="Motor_Mount_Flat.pdf" class="pdf-download-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download PDF
+            </a>
+          </div>
+          <div class="pdf-embed-wrap">
+            <!-- ↓ replace with your actual PDF filename uploaded to /projects/ -->
+            <iframe src="motor-mount-flat.pdf" title="Motor Mount Flat technical drawing"></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 Giovanni Gunawan Wangidjaja · Built with plain HTML</p>
+  </footer>
+
+</body>
+</html>
