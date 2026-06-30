@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Lifetime Value Prediction — Giovanni Gunawan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — keep identical to index.html
+    ============================================================ */
+    :root {
+      --bg:             #eef0f4;
+      --bg-card:        #f5f6f9;
+      --bg-subtle:      #e8eaef;
+      --accent:         #2c4a8f;
+      --accent-dim:     rgba(44,74,143,0.09);
+      --accent-hover:   #1e3570;
+      --text-primary:   #1a1d23;
+      --text-secondary: #4a5060;
+      --text-muted:     #8a909f;
+      --border:         rgba(0,0,0,0.07);
+      --radius:         12px;
+      --font-display:   'Space Grotesk', sans-serif;
+      --font-body:      'Inter', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 28px; }
+
+    /* NAV — same as index.html */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(238,240,244,0.90);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .container {
+      display: flex; align-items: center;
+      justify-content: space-between; height: 56px;
+    }
+    .nav-logo {
+      display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+    }
+    .nav-logo-box {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--accent); display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 14px;
+      color: #fff; letter-spacing: 0.5px;
+    }
+    .nav-logo-text { line-height: 1.2; }
+    .nav-logo-name { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--text-primary); }
+    .nav-logo-sub {
+      font-family: var(--font-display); font-weight: 700; font-size: 10px;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-secondary);
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--text-secondary); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); text-decoration: none; }
+    @media (max-width: 680px) { .nav-links { display: none; } }
+
+    /* PAGE CONTENT */
+    main { padding: 48px 0 100px; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    .back-link svg { width: 16px; height: 16px; }
+
+    .project-label {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #c0392b; margin-bottom: 12px;
+    }
+    .project-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 46px);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+    .project-h1 span { color: #c0392b; }
+    .project-intro {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .project-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 40px;
+    }
+    .project-tag {
+      font-size: 13px; color: var(--text-secondary);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 4px 14px;
+    }
+
+    /* GitHub CTA button */
+    .github-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: #fff;
+      padding: 13px 28px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-bottom: 48px;
+    }
+    .github-cta:hover { background: var(--accent-hover); text-decoration: none; }
+    .github-cta svg { width: 18px; height: 18px; }
+
+    .section-block { margin-bottom: 48px; }
+    .section-h2 {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+    .detail-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .detail-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .detail-item strong { color: var(--text-primary); }
+
+    footer {
+      text-align: center; padding: 32px 24px;
+      font-size: 13px; color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV — identical to index.html
+  ============================================================ -->
+  <nav>
+    <div class="container">
+      <a href="../index.html#hero" class="nav-logo">
+        <div class="nav-logo-box">GG</div>
+        <div class="nav-logo-text">
+          <div class="nav-logo-name">Giovanni</div>
+          <div class="nav-logo-sub">Portfolio</div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html#hero">Home</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <!-- Back link -->
+      <a href="../index.html#projects" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m7-7-7 7 7 7"/></svg>
+        Back to Home
+      </a>
+
+      <!-- Title block -->
+      <p class="project-label">Data Science</p>
+      <h1 class="project-h1">Customer Lifetime Value Prediction<span>.</span></h1>
+      <p class="project-intro">
+        A machine learning pipeline that predicts Customer Lifetime Value (CLV) using
+        historical transaction data. Implements feature engineering, RFM segmentation,
+        and regression models (XGBoost, Random Forest) to help businesses identify
+        high-value customers and optimize marketing strategies.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">XGBoost</span>
+        <span class="project-tag">Scikit-learn</span>
+        <span class="project-tag">Machine Learning</span>
+        <span class="project-tag">Pandas</span>
+      </div>
+
+      <!-- GitHub CTA -->
+      <a href="https://github.com/Giovanni-ivanong/Capstone_3_Customer-Life-Value-CLV-" target="_blank" rel="noopener" class="github-cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        View Full Project on GitHub
+      </a>
+
+      <!-- Project details -->
+      <div class="section-block">
+        <h2 class="section-h2">Project Overview</h2>
+        <div class="detail-list">
+          <div class="detail-item">
+            <strong>Data Processing:</strong> Cleaned and engineered features from historical
+            transaction data, including recency, frequency, and monetary (RFM) metrics.
+          </div>
+          <div class="detail-item">
+            <strong>Modelling:</strong> Trained and compared multiple regression models —
+            including Random Forest and XGBoost — to predict customer lifetime value.
+          </div>
+          <div class="detail-item">
+            <strong>Outcome:</strong> Identified high-value customer segments to support
+            targeted marketing strategies and improve customer retention decisions.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 Giovanni Gunawan Wangidjaja · Built with plain HTML</p>
+  </footer>
+
+</body>
+</html>
