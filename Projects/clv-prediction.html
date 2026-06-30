@@ -148,6 +148,7 @@
       font-size: 14.5px;
       color: var(--text-secondary);
       line-height: 1.7;
+      text-align: justify;
     }
     .detail-item strong { color: var(--text-primary); }
 
@@ -194,17 +195,23 @@
       <p class="project-label">Data Science</p>
       <h1 class="project-h1">Customer Lifetime Value Prediction<span>.</span></h1>
       <p class="project-intro">
-        A machine learning pipeline that predicts Customer Lifetime Value (CLV) using
-        historical transaction data. Implements feature engineering, RFM segmentation,
-        and regression models (XGBoost, Random Forest) to help businesses identify
-        high-value customers and optimize marketing strategies.
+        A machine learning pipeline built as my third capstone project for the
+        Purwadhika Data Science certification, predicting Customer Lifetime Value
+        (CLV) for a car insurance company using customer demographic and policy
+        data. The project covers the full data science workflow — data cleaning,
+        exploratory analysis, feature engineering, model benchmarking across 9
+        regression algorithms, and hyperparameter tuning to arrive at a final
+        Gradient Boosting model.
       </p>
       <div class="project-tags">
         <span class="project-tag">Python</span>
-        <span class="project-tag">XGBoost</span>
+        <span class="project-tag">Jupyter Notebook</span>
         <span class="project-tag">Scikit-learn</span>
         <span class="project-tag">Machine Learning</span>
         <span class="project-tag">Pandas</span>
+        <span class="project-tag">Computer Science</span>
+        <span class="project-tag">Data Analyst</span>
+        <span class="project-tag">VS Code</span>
       </div>
 
       <!-- GitHub CTA -->
@@ -213,25 +220,38 @@
         View Full Project on GitHub
       </a>
 
-      <!-- Project details -->
+     <!-- Project details -->
       <div class="section-block">
         <h2 class="section-h2">Project Overview</h2>
         <div class="detail-list">
           <div class="detail-item">
-            <strong>Data Processing:</strong> Cleaned and engineered features from historical
-            transaction data, including recency, frequency, and monetary (RFM) metrics.
+            <strong>Business Context:</strong> A car insurance company wanted to predict
+            Customer Lifetime Value (CLV) using customer demographic and policy data, helping
+            the marketing team target high-value customers more effectively and allocate
+            budget more efficiently.
           </div>
           <div class="detail-item">
-            <strong>Modelling:</strong> Trained and compared multiple regression models —
-            including Random Forest and XGBoost — to predict customer lifetime value.
+            <strong>Data Cleaning:</strong> The data is cleaned using duplicate removal,
+            missing value checks, and outlier detection across all numerical features.
           </div>
           <div class="detail-item">
-            <strong>Outcome:</strong> Identified high-value customer segments to support
-            targeted marketing strategies and improve customer retention decisions.
+            <strong>Machine Learning:</strong> I use 9 regression models — including Linear
+            Regression, KNN, Decision Tree, Random Forest, AdaBoost, XGBoost, and Gradient
+            Boosting — evaluated using RMSE, MAE, and MAPE.
+          </div>
+          <div class="detail-item">
+            <strong>Hyperparameter Tuning:</strong> Gradient Boosting was selected as the
+            final model and refined using RandomizedSearchCV and GridSearchCV hyperparameter
+            tuning.
+          </div>
+          <div class="detail-item">
+            <strong>Machine Learning Prediction Result:</strong> Since policy count and
+            premium amount are the dominant CLV drivers, the company can create more
+            personalized offers based on these factors — supporting upselling, cross-selling,
+            and more efficient retention of high-value customers.
           </div>
         </div>
       </div>
-
     </div>
   </main>
 
