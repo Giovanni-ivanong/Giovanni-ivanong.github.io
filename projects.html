@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Projects — Giovanni Gunawan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — keep identical to index.html
+    ============================================================ */
+    :root {
+      --bg:             #eef0f4;
+      --bg-card:        #f5f6f9;
+      --bg-subtle:      #e8eaef;
+      --accent:         #2c4a8f;
+      --accent-dim:     rgba(44,74,143,0.09);
+      --accent-hover:   #1e3570;
+      --text-primary:   #1a1d23;
+      --text-secondary: #4a5060;
+      --text-muted:     #8a909f;
+      --border:         rgba(0,0,0,0.07);
+      --radius:         12px;
+      --font-display:   'Space Grotesk', sans-serif;
+      --font-body:      'Inter', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: none; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 28px; }
+
+    /* NAV — same as index.html */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(238,240,244,0.90);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .container {
+      display: flex; align-items: center;
+      justify-content: space-between; height: 56px;
+    }
+    .nav-logo {
+      display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+    }
+    .nav-logo-box {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--accent); display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 14px;
+      color: #fff; letter-spacing: 0.5px;
+    }
+    .nav-logo-text { line-height: 1.2; }
+    .nav-logo-name { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--text-primary); }
+    .nav-logo-sub {
+      font-family: var(--font-display); font-weight: 700; font-size: 10px;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-secondary);
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--text-secondary); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); text-decoration: none; }
+    @media (max-width: 680px) { .nav-links { display: none; } }
+
+    /* PAGE CONTENT */
+    main { padding: 48px 0 100px; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    .back-link svg { width: 16px; height: 16px; }
+
+    .page-label {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #c0392b; margin-bottom: 12px;
+    }
+    .page-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 46px);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 14px;
+    }
+    .page-h1 span { color: #c0392b; }
+    .page-sub {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      line-height: 1.7;
+      margin-bottom: 56px;
+    }
+
+    /* CATEGORY SECTIONS */
+    .category-block { margin-bottom: 56px; }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .category-icon {
+      width: 22px; height: 22px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .category-icon svg { width: 100%; height: 100%; }
+    .category-title {
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .category-title span { color: #c0392b; }
+
+    /* PROJECT CARDS — same style as index.html projects grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      text-decoration: none;
+    }
+    .project-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+    }
+    .project-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .project-tag {
+      font-size: 11px;
+      color: var(--text-secondary);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2px 9px;
+    }
+    .project-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .project-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+
+    footer {
+      text-align: center; padding: 32px 24px;
+      font-size: 13px; color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV — identical to index.html
+  ============================================================ -->
+  <nav>
+    <div class="container">
+      <a href="index.html#hero" class="nav-logo">
+        <div class="nav-logo-box">GG</div>
+        <div class="nav-logo-text">
+          <div class="nav-logo-name">Giovanni</div>
+          <div class="nav-logo-sub">Portfolio</div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#hero">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <!-- Back link -->
+      <a href="index.html#hero" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m7-7-7 7 7 7"/></svg>
+        Back to Home
+      </a>
+
+      <!-- Page title -->
+      <p class="page-label">Portfolio</p>
+      <h1 class="page-h1">All Projects<span>.</span></h1>
+      <p class="page-sub">
+        A collection of engineering and data science projects spanning embedded systems,
+        CAD modelling, and data analysis.
+      </p>
+
+      <!-- ============================================================
+           CATEGORY: EMBEDDED SYSTEMS
+      ============================================================ -->
+      <div class="category-block">
+        <div class="category-header">
+          <span class="category-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="11" width="10" height="8" rx="1"/><path d="M12 11V7"/><circle cx="12" cy="5" r="2"/><path d="M7 14H5m12 0h2"/></svg>
+          </span>
+          <h2 class="category-title">Embedded Systems<span>.</span></h2>
+        </div>
+        <div class="projects-grid">
+
+          <a href="Projects/self-balancing-robot.html" class="project-card">
+            <img src="Picture/Robot.png" alt="Self-Balancing Robot" class="project-img" />
+            <div class="project-body">
+              <div class="project-tags">
+                <span class="project-tag">ESP32</span>
+                <span class="project-tag">SolidWorks</span>
+                <span class="project-tag">PID</span>
+                <span class="project-tag">Fuzzy Logic</span>
+                <span class="project-tag">Python</span>
+              </div>
+              <p class="project-title">Self-Balancing Robot</p>
+              <p class="project-desc">
+                Thesis project. 3D modelled and printed the chassis, wired an ESP32,
+                and implemented PID vs Fuzzy Logic control with Python Teleplot for analysis.
+              </p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- ============================================================
+           CATEGORY: CAD DESIGN
+      ============================================================ -->
+      <div class="category-block">
+        <div class="category-header">
+          <span class="category-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M4.22 4.22l2.12 2.12m11.32 11.32 2.12 2.12M2 12h3m14 0h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+          </span>
+          <h2 class="category-title">CAD Design<span>.</span></h2>
+        </div>
+        <div class="projects-grid">
+
+          <a href="Projects/bldc-motor-mount.html" class="project-card">
+            <img src="Picture/BLDC.png" alt="BLDC Motor Mount" class="project-img" />
+            <div class="project-body">
+              <div class="project-tags">
+                <span class="project-tag">SolidWorks</span>
+                <span class="project-tag">CAD</span>
+                <span class="project-tag">Milling</span>
+                <span class="project-tag">CNC</span>
+                <span class="project-tag">Mechanical Design</span>
+                <span class="project-tag">Aluminium</span>
+              </div>
+              <p class="project-title">BLDC Motor Mount</p>
+              <p class="project-desc">
+                A motor mount engineered for a hoverboard BLDC motor, designed for
+                versatile manufacturing — compatible with CNC machining or 3D printing.
+              </p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- ============================================================
+           CATEGORY: DATA ANALYSIS
+      ============================================================ -->
+      <div class="category-block">
+        <div class="category-header">
+          <span class="category-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 16 4-4 4 4 4-4"/></svg>
+          </span>
+          <h2 class="category-title">Data Analysis<span>.</span></h2>
+        </div>
+        <div class="projects-grid">
+
+          <a href="Projects/clv-prediction.html" class="project-card">
+            <img src="Picture/CLV.png" alt="CLV Prediction" class="project-img" />
+            <div class="project-body">
+              <div class="project-tags">
+                <span class="project-tag">Python</span>
+                <span class="project-tag">Jupyter Notebook</span>
+                <span class="project-tag">Scikit-learn</span>
+                <span class="project-tag">Machine Learning</span>
+                <span class="project-tag">Pandas</span>
+                <span class="project-tag">Computer Science</span>
+                <span class="project-tag">Data Analyst</span>
+                <span class="project-tag">VS Code</span>
+              </div>
+              <p class="project-title">Customer Lifetime Value Prediction</p>
+              <p class="project-desc">
+                A machine learning pipeline that predicts Customer Lifetime Value
+                using RFM segmentation and regression models to identify high-value customers.
+              </p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 Giovanni Gunawan Wangidjaja · Built with plain HTML</p>
+  </footer>
+
+</body>
+</html>
